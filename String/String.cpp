@@ -8,7 +8,7 @@
 #include <iostream>
 
 using namespace std;
-
+// construtor by a c string
 String::String(char *string2) {
     
     length = strlen(string2);
@@ -16,20 +16,26 @@ String::String(char *string2) {
     strcpy(entries, string2);
 }
 
+// constructor by default
 String::String() {
     length = 0;
     entries = NULL;
 }
+
+// destructor
 String::~String() {
     if (entries != NULL)
 	delete []entries;
 }
+// copy constructor
 String::String(const String &origin) {
   
     length = strlen(origin.entries);
     entries = new char[length + 1];
     strcpy(entries, origin.entries);
 }
+
+// find the character in index
 char String::charAt(int index) {
 
    if (index < 0)
@@ -53,7 +59,7 @@ String String::slice(int start, int end) {
 	    temp[k++] = this->entries[i];
     }
     String string(temp);
-
+    delete []temp;
     return string;
 }
 
@@ -97,6 +103,7 @@ int String::lastIndexOf(String str, int startindex) {
     
     return flag;
 }
+
 String String::concat(String string2) {
  
     char * copy = new char[length + string2.length + 1];

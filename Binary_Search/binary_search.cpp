@@ -1,6 +1,10 @@
 #ifndef BINARY_SEARCH_CPP
 #define BINARY_SEARCH_CPP
 
+/* binary search using recursion
+ * check whether find the target after
+ * recursion
+*/
 bool recur_binary_1(int a[], int start, int end, int key) {
 
     if (start < end) {

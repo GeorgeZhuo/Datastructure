@@ -31,12 +31,14 @@ void prim() {
     source = 0;
     memset(visited, false, sizeof(visited));
   
+    // init the adjacency edge and S
     visited[source] = true;
     for (int i = 0; i < nodenum; i++)
 	lowcost[i] = graph[source][i];
 
     for (int i = 1; i < nodenum; i++) {
 	mini = INF;
+	// find the lightest adjacency edge
 	for (int j = 0; j < nodenum; j++) 
 	    if (!visited[j] && lowcost[j] < mini) {
 		lable = j;
@@ -44,9 +46,11 @@ void prim() {
 	    }
 
 	if (mini < INF) {
+	    // add the new edge
 	    visited[lable] = true;
 	    sum += mini;
-
+	    
+	    // update the adjacency edge
 	    for (int k = 0; k < nodenum; k++)
 		if (!visited[k] && graph[lable][k] < lowcost[k])
 		    lowcost[k] = graph[lable][k];	
@@ -67,4 +71,5 @@ int main () {
 	cout << sum << endl;
     }
 }
+
 

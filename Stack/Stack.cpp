@@ -3,12 +3,17 @@
 #include "Stack.h"
 #include "Define.h"
 
+// creat a empty stack, let top_ points to null
 Stack::Stack() {
     top_ = NULL;
 }
+
+// clear the stack data when the object is destroyed 
 Stack::~Stack() {
     clear();
 }
+
+// if the stack is not full, add a new one on the top
 Error_code Stack::push(const Stack_entry &item) {
 
     Node *temp = new Node(item);
@@ -20,6 +25,8 @@ Error_code Stack::push(const Stack_entry &item) {
 
     return success;
 }
+
+// if the stack is empty, remove the top
 Error_code Stack::pop() {
     if (top_ == NULL) return underflow;
     
@@ -30,6 +37,8 @@ Error_code Stack::pop() {
 
     return success;
 }
+
+// if the stack is not empty, get the data on the top
 Error_code Stack::top(Stack_entry &item) const {
     if (top_ == NULL) 
 	return underflow;
@@ -37,9 +46,16 @@ Error_code Stack::top(Stack_entry &item) const {
 
     return success;
 }
+
+// check whether the stack is empty
 bool Stack::empty() const {
     return (top_ == NULL);
 }
+
+/*  overloading the assignment operator
+ *  creat a new stack, delete the old one
+ *  let the top points the new one
+ */
 void Stack::operator=(const Stack &origin) {
     Node *new_top, *tail, *pt1, *origin_node = origin.top_;
     new_top = NULL;
@@ -62,6 +78,11 @@ void Stack::operator=(const Stack &origin) {
     
     top_ = new_top;
 }
+
+/* copy constructor
+ * create a new one by using copy from the other
+ * let top points the new one
+*/
 Stack::Stack(const Stack &origin) {
     Node *new_top, *tail, *pt1, *origin_node = origin.top_;
     new_top = NULL;
@@ -77,6 +98,7 @@ Stack::Stack(const Stack &origin) {
     top_ = new_top;
 }
 
+// delete all nodes, free the space
 Error_code Stack::clear() {
     Node *old_node;
     for (Node *pt = top_; pt != NULL; pt = pt->next) {

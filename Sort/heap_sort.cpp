@@ -12,10 +12,13 @@ void insert_heap(int current, int low, int high) {
     int large; // the position of child of entry[low] with the larger key
     large = low * 2 + 1; // large now is the left child of low
     while (large <= high) {
+	// choose the root of the current heap
 	if (large < high && entry[large] < entry[large + 1])
 	    large++;
+	// if the current key is largest, it will be the root
 	if (current >= entry[large])
 	    break;
+	// go to the subheap
 	else {
 	    entry[low] = entry[large];
 	    low = large;
